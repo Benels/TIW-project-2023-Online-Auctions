@@ -1,0 +1,91 @@
+body {
+  background-color: #212121;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+table {
+  color: white;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid white;
+   padding: 10px;
+}
+
+.backHome {
+	background-color: #404040;
+	margin-left: 500px; 
+  padding: 10px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+  border: 1px solid #212121;
+  box-shadow: 3px 3px 5px rgba(0,0,0,1), 
+   1px 1px 5px rgba(255, 255, 255, 0.6);
+  color: white; 
+  font-size: 40px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.35s;
+  display: inline-block;
+}
+
+.backHome:hover {
+  transform: scale(1.05);
+  box-shadow: 3px 3px 5px rgba(0,0,0,1),
+  1px 1px 5px rgba(255, 255, 255, 0.6),
+  inset 2px 2px 10px rgba(0,0,0,1),
+  inset -1px -1px 5px rgba(255, 255, 255, 0.6);
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+  padding: 5px;
+  border: 1px solid white;
+  background-color: #212121;
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+input[type="file"] {
+  padding: 5px;
+  border: none;
+  background-color: #212121;
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+button[type="submit"] {
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: #212121;
+  border: 1px solid #212121;
+  border-radius: 6px;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  transition: 0.35s;
+}
+
+button[type="submit"]:hover {
+  transform: scale(1.05);
+  box-shadow: 6px 6px 10px rgba(0, 0, 0, 1), 1px 1px 10px rgba(255, 255, 255, 0.6),
+    inset 2px 2px 10px rgba(0, 0, 0, 1), inset -1px -1px 5px rgba(255, 255, 255, 0.6);
+}
+
+
+.action {
+  color: white;
+  text-decoration: none;
+}
+
+fieldset {
+  display: inline-block;
+  border: 1px solid white; 
+  padding: 10px; 
+}
+

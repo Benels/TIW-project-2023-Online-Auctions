@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+	<meta charset="UTF-8">
+	<link href="css/pages.css" th:href="@{/css/pages.css}" rel="stylesheet" />
+	
+	<title>Open Auction Details</title>
+</head>
+
+<body>
+<!-- dettagli degli oggetti nell'asta  -->
+<h1>Auction's details</h1>
+<!-- mettere prezzo iniziale, min raise, data fine... -->
+
+
+<h2>Here are all the products present in this auction</h2>	
+	<table>
+		<tr>
+			<td>Item: </td>
+			<td>Description: </td>
+			<td>Picture: </td>
+		</tr>
+			<tr th:each="item : ${Items}">
+				<td th:text=${item.name}></td>
+				<td th:text="${item.description}"></td>
+				<td>
+					<img th:src="@{/GetPicture(image=${item.itemPicture})}" alt="Image" style="width: 300px; height: 200px;">
+				</td>
+			</tr>
+	</table>
+
+<!-- lista di tutte le bid -->
+	
+<h1>Here is the list of all the bids for this auction</h1>	
+	<table>
+		<tr>
+			<td>Bidder: </td>
+			<td>Bid's price: </td>
+			<td>Bid's date: </td>
+		</tr>
+			<tr th:each="offerta : ${Bids}">
+				<td th:text=${offerta.bidderUsername}></td>
+				<td th:text="${offerta.cost}"></td>
+				<td	th:text="${offerta.biddate}"></td>
+			</tr>
+	</table>
+
+
+
+<!-- bottone chiudi -->
+<h3>Click here to close this auction:</h3>
+<div th:if="${countdown == null}">
+	<form th:action="@{/CloseAuction}" method="POST">
+		<input type="hidden" name="auctionid" th:value="${Auction.auctionid}">
+		<button type="submit">Close auction</button>
+		
+		<p th:text=" ${closeAuctionErrorMessage}"></p>
+	</form>
+</div>
+<div th:if="${countdown != null}">
+	<p th:text="${countdown}"></p>
+</div>
+
+
+
+     
+<br>  
+<br>  
+<br>  
+<br>  
+<div class="backHome">
+	<a th:href ="@{/GoToHomePage}" class="action">Home</a>
+</div> 
+</body>
+</html>

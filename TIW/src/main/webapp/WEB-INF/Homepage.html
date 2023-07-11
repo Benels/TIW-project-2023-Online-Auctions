@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>	
+	<title>Home page</title>
+	<link href="css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+
+<body>
+	<div class="actionsContainer">
+		<div class="actions">
+	    	 <a th:href="@{/SellServlet}" class="action">Sell</a><br>
+	    	 <a th:href="@{/BuyServlet}" class="action">Buy</a><br>
+	    	 <br><br>
+	    	 <a th:href="@{/Logout}" class="action">Logout</a><br>
+		</div>
+	</div>
+</body>
+</html>

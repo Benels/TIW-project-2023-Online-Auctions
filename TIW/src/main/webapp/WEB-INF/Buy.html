@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+	<meta charset="UTF-8">
+		
+		<!-- 
+		<link href="css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+	 -->
+	 	<link href="css/extra.css" th:href="@{/css/extra.css}" rel="stylesheet" />
+	 
+	<title>Buy</title>
+</head>
+
+
+<body>
+
+<h1 class="login_title">Enter a keyword to filter the auctions: </h1>
+<form action="BuyServlet" method="GET" class="form">
+	<label for="keyword">Keyword: </label>
+    <input type="text" placeholder="Insert your keyword..." id="kewword" name="keyword"   required><!--  minlength="5"--> <br>
+ 
+ 	<button type="submit" class="login_button">Search!</button>
+    <p th:text=" ${searchErrorMessage}"></p>
+  </form>  
+
+
+<h1 class="login_title">Here are all the open auctions with the keyword that you submitted: </h1>
+<table  th:if="${keyAuctionList != null}">
+    <thead  class="theads">
+    <tr>
+        <th class="theads">Current Best Bid</th>
+        <th class="theads">Minimum Raise</th>
+        <th class="theads">Deadline</th>
+        <th class="theads">Items</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="a : ${keyAuctionList}">
+
+        <td th:text="${a.currentBestBid}"></td>
+        <td th:text="${a.minimumRise}"></td>
+
+		<td th:text="${a.deadlineDate}">Null Value</td>
+		
+		<td>
+			<table id="inner_table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Picture</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="item : ${a.itemList}">
+					<td th:text="${item.name}">Null Value</td>
+					<td th:text="${item.description}">Null Value</td>
+					<td>
+						<img th:src="@{/GetPicture(image=${item.itemPicture})}" alt="Image" style="width: 300px; height: 200px;">
+					</td>
+
+				</tr>
+			</tbody>
+			</table>
+		</td>
+        <td><a th:href ="@{/BidServlet(auctionid=${a.auctionID})}" style="color: white;">Details</a></td>
+    </tr>
+    </tbody>
+</table>
+<p th:if="${keyAuctionList == null}"> Insert a keyword to filter the auctions </p>
+
+
+
+
+<!--  list won auctions -->
+<h1 class="login_title">Here are all the auctions that you won before: </h1>
+  <table th:if="${wonAuctionList.size()>0}" id="outer_table">
+    <thead>
+      <tr>
+		<th>Your Winning Bid:</th>
+        <th>Won Items:<!-- inner table for the datas of the items in the Auctions --></th>
+      </tr>
+    </thead>
+    <tbody>
+		<tr th:each="wonAuction : ${wonAuctionList}">
+			<td th:text="${wonAuction.currentBestBid}">Null Value</td>
+			<td>
+				<table id="inner_table">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Description</th>
+						<th>Picture</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="item : ${wonAuction.itemList}">
+						<td th:text="${item.name}">Null Value</td>
+						<td th:text="${item.description}">Null Value</td>
+						<td>
+							<img th:src="@{/GetPicture(image=${item.itemPicture})}" alt="Image" style="width: 300px; height: 200px;">
+						</td>
+					</tr>
+				</tbody>
+				</table>
+			</td>
+		</tr>
+	</tbody>
+  </table>
+  <p th:if="${wonAuctionList.size()==0}" class="msg"> Seems like you never won any auctions before... :( </p>
+  
+     
+<br>  
+<br>  
+<br>  
+<br>  
+<div class="backHome">
+	<a th:href ="@{/GoToHomePage}" class="action">Home</a>
+</div> 
+</body>
+</html>

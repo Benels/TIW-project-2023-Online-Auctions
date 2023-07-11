@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>TIW</display-name>
+  <context-param>
+    <param-name>dbUrl</param-name>
+  <!-- <param-value>jdbc:mysql://127.0.0.1:3306/?user=root</param-value> -->  
+   <param-value>jdbc:mysql://localhost:3306/onlineauctions?serverTimezone=UTC</param-value>
+    <!-- root@localhost:3306
+    			jdbc:mysql://localhost:3306/onlineauctions?serverTimezone=UTC
+    jdbc:mysql://localhost:3306/?user=root    jdbc:mysql://localhost:3306/?user=root
+     -->
+    </context-param>
+  <context-param>
+    <param-name>dbUser</param-name>
+    <param-value>root</param-value>
+  </context-param>
+  <context-param>
+    <param-name>dbPassword</param-name>
+    <param-value>260501</param-value>
+  </context-param>
+  <context-param>
+    <param-name>dbDriver</param-name>
+    <param-value>com.mysql.cj.jdbc.Driver</param-value>
+  </context-param>
+    <context-param>
+    <param-name>imgFolder</param-name>
+    <param-value>C:\Users\frabe\Desktop\imgstiw\</param-value>
+  </context-param>
+
+  <filter> 
+      <filter-name>Checker</filter-name>
+      <filter-class>filters.Checker</filter-class> 
+ </filter> 
+  <filter-mapping> 
+    <filter-name>Checker</filter-name> 
+    <url-pattern>/BidServlet</url-pattern>
+    <url-pattern>/BuyServlet</url-pattern>
+    <url-pattern>/CloseAuction</url-pattern>
+    <url-pattern>/ClosedAuctionDetails</url-pattern>
+    <url-pattern>/GetPicture</url-pattern> 
+    <url-pattern>/GoToHomePage</url-pattern> 
+    <url-pattern>/Logout</url-pattern>
+    <url-pattern>/NewAuction</url-pattern>
+    <url-pattern>/NewBid</url-pattern>
+    <url-pattern>/NewItem</url-pattern>
+    <url-pattern>/OpenAuctionDetails</url-pattern>
+    <url-pattern>/SellServlet</url-pattern>
+  </filter-mapping> 
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+  </welcome-file-list>
+</web-app>

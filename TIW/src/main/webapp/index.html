@@ -1,0 +1,27 @@
+<!DOCTYPE html><!--Login Page-->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+	<title>Login page</title>
+	<link href="css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+
+<body>
+	<h1 class="login_title">Welcome! Please log in to start bidding and auctioning!</h1>
+	
+	<div class= "loginContainer">
+		<form action="Login" method="POST" class="login">
+			
+	        <label for="username" style="color: white;">Username: </label>
+	        <input type="text" placeholder="Enter your username..." id="username" name="username" required class="login_input"> <br>
+	        <label for="password" style="color: white;">Password: </label>
+	        <input type="password" placeholder="****" 				id="password" name="password" required class="login_input"> <br>
+        
+        	<button type="submit" class="login_button">Login</button>
+	        <p th:text=" ${loginErrorMessage}"></p>
+		</form>
+	</div>
+
+</body>
+</html>

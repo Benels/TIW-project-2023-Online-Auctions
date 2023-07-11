@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+	<meta charset="UTF-8">
+	<link href="css/pages.css" th:href="@{/css/pages.css}" rel="stylesheet" />
+	<title>Auction Details</title>
+</head>
+
+
+<!-- Se l’asta è chiusa, la pagina riporta tutti i dati dell’asta, 
+il nome dell’aggiudicatario, il prezzo finale e l’indirizzo (fisso) 
+di spedizione dell’utente -->
+
+<body>
+<h1>This auction is already closed</h1>
+
+
+<h2>Winner of the Auction</h2>
+
+
+<p th:text="'Username: ' + ${winner.username}"></p>
+<p th:text="'Name: ' + ${winner.name}"></p>
+<p th:text="'Surname: ' + ${winner.surname}"></p>
+<p th:text="'Contact info: ' + ${winner.email}"></p>
+<p th:text="'Expedition infos: ' + ${winner.city} +' '+ ${winner.address} +' '+ ${winner.civic}"></p>
+<p th:text="'Winning Bid: ' + ${auction.currentBestBid}"></p>
+     
+<br>  
+<br>
+
+<h3>Here are its datas: </h3>
+
+
+<table>
+    <thead>
+      <tr>
+        <th>Item Name</th>
+        <th>Description</th>
+        <th>Picture</th>
+      </tr>
+    </thead>
+    <tbody>
+			<tr th:each="item : ${auction.itemList}">
+				<td th:text="${item.name}">Null Value</td>
+				<td th:text="${item.description}">Null Value</td>
+
+				<td>
+					<img th:src="@{/GetPicture(image=${item.itemPicture})}" alt="Image" style="width: 300px; height: 200px;">
+				</td>
+				
+			</tr>
+		</tbody>
+</table>
+
+     
+<br>  
+<br>  
+<br>  
+<br>  
+<div class="backHome">
+	<a th:href ="@{/GoToHomePage}" class="action">Home</a>
+</div> 
+</body>
+
+
+</html>

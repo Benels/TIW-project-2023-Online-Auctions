@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+<meta charset="UTF-8">
+	<link href="css/extra.css" th:href="@{/css/extra.css}" rel="stylesheet" />
+
+<title>Sell</title>
+</head>
+
+<body>
+
+	<h1>Your open auctions: </h1>
+	<table>
+		<thead>
+			<tr>
+		        <th>Auction ID</th>
+		        <th>Best Bid</th>
+		        <th>Minimum Raise</th>
+		        <th>Time left</th>
+		        <th>Deadline</th>
+		        <th>Details</th>
+	    	</tr>
+	    </thead>
+    	<tbody>
+			<tr th:each="auction : ${openAuctionList}">
+				<td th:text="${auction.auctionID}">Null Value</td>
+				<td th:text="${auction.currentBestBid}">No current Bids</td>
+				<td th:text="${auction.minimumRise}">No current Bids</td>
+				<td th:text="${auction.period}">Already Ended...</td>
+				<td th:text="${auction.deadlineDate}">Null Value</td>
+				<td><a th:href="@{/OpenAuctionDetails(auctionID=${auction.auctionID})}" style="color: white;">Details</a></td>
+			</tr>
+		</tbody>
+ 	</table>
+        
+       
+    <h1>Your closed auctions: </h1>
+	<table>
+	    <thead>
+	      <tr>
+	        <th>Auction ID</th>
+	        <th>Deadline</th>
+	        <th>Winning Bid</th>
+	        <th>Details</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+			<tr th:each="closedAuction : ${closedAuctionList}">
+				<td th:text="${closedAuction.auctionID}">Null Value</td>
+				<td th:text="${closedAuction.deadlineDate}">Null Value</td>
+				<td th:text="${closedAuction.currentBestBid}">No Bids</td>
+				<td><a th:href="@{/ClosedAuctionDetails(closedAuctionID=${closedAuction.auctionID})}" style="color: white;">Details</a></td>
+			</tr>
+		</tbody>
+    </table>
+
+
+  <h1>Insert a new Item</h1>
+  <form th:action="@{/NewItem}" method="POST" enctype="multipart/form-data"><!-- Un articolo ha codice, nome, descrizione, immagine e prezzo -->
+       				
+       <fieldset>
+       		<label style="color: white;">Name: </label>
+		    <input type="text" placeholder="Enter a name..." id="name" name="name" required> <br>
+       		<label style="color: white;">Description: </label>		   
+		    <input type="text" placeholder="Write here a complete description for the current item" id="description" name="description" required><br>
+       		<label style="color: white;">Price: </label>		    
+		    <input type="file"  id="file" name="file"><br><br>
+		    <input id="price" name="price" type="number" placeholder="4.20" min="1" max="999999.99" step="0.01" required><br><br>
+		  
+		    <button type="submit">Add</button>
+		    <p th:text=" ${insertItemErrorMessage}"></p>
+    	</fieldset>
+  </form>  
+
+		
+  <h1>Create a new Auction: </h1>
+  <form action="NewAuction" method="POST">
+  
+  		<fieldset>
+  
+		  	<label for="minimumRise">Bids' minimum rise [euros]: </label>
+		  	<input id="minimumRise" name="minimumRise" type="number" placeholder="4.20" min="1" max="99.99" step="0.01" required><br><br>
+		  		        
+		  	<label for="deadlineLocalDateTime">Auction closing time: </label>
+		  	<input id="deadlineLocalDateTime" name="deadlineLocalDateTime" type="datetime-local"
+		             th:min="${dateMin}"  th:max="${dateMax}" required><br><br>
+		     <input type="hidden" id="deadlineTimeZone" name="deadlineTimeZone" value="Europe/Rome">
+		     
+		 	 <p th:each="item : ${userItemsList}">
+		 	   	<input type="checkbox" 
+		 	   		th:id="${'checkbox-' + #strings.replace(item.name, ' ', '')}"
+		        th:name="'dynamicCheckbox'" th:value="${item.itemID}"/>
+		      <label th:for="${'checkbox-' + #strings.replace(item.name, ' ', '')}" th:text="${item.name}"></label><br>
+		    </p>
+		
+		  	<button type="submit">Add</button>
+		    <p th:text=" ${insertItemErrorMessage}"></p>
+	    				
+		</fieldset>
+	</form>
+
+     
+	<br> <br> <br> <br>  
+	<div class="backHome">
+		<a th:href ="@{/GoToHomePage}" class="action">Home</a>
+	</div> 
+</body>
+</html>

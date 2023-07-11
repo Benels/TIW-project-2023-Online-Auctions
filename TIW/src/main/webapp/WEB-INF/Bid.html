@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+	<meta charset="UTF-8">
+		<link href="css/extra.css" th:href="@{/css/extra.css}" rel="stylesheet" />
+	
+	<title>Bid</title>
+</head>
+
+<body>
+	
+	<h1>Here are all the products present in this auction</h1>	
+		<table>
+			<tr>
+				<td>Item: </td>
+				<td>Description: </td>
+				<td>Picture: </td>
+			</tr>
+				<tr th:each="item : ${Items}">
+					<td th:text=${item.name}></td>
+					<td th:text="${item.description}"></td>
+					<td>
+						<img th:src="@{/GetPicture(image=${item.itemPicture})}" alt="Image" style="width: 300px; height: 200px;">
+					</td>
+				</tr>
+		</table>
+	
+		
+	<h1>Here is the list of all the bids for this auction</h1>	
+		<table>
+			<tr>
+				<td>Bidder: </td>
+				<td>Bid's price: </td>
+				<td>Bid's date: </td>
+			</tr>
+				<tr th:each="offerta : ${Bids}">
+					<td th:text=${offerta.bidderUsername}></td>
+					<td th:text="${offerta.cost}"></td>
+					<td	th:text="${offerta.bidDate}"></td>
+				</tr>
+		</table>
+	
+	
+	<h1>Place your Bid using this form!</h1>
+		<form th:action="@{/NewBid}" method="POST">
+			<p th:text=" ${nextBidMin}"> is the minimum!</p>
+			<input type="number" id="bid" name="bid" placeholder="Insert your proposal" th:min="${nextBidMin}" max="999999999.99" step="0.01" required> 
+			<input type="hidden" th:value="${Auction.auctionID}" name="auctionid" /> 
+			
+			<button type="submit">Submit</button>
+		    <p th:text=" ${bidErrorMessage}"></p>
+		</form>
+	
+	<br> <br> <br> <br>  
+	
+	<div class="backHome">
+		<a th:href ="@{/GoToHomePage}" class="action">Home</a>
+	</div> 
+
+</body>
+</html>
