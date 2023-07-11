@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+    <meta charset="ISO-8859-1">
+    <title>Home</title>
+
+        
+   <link href="css/style.css" rel="stylesheet" type="text/css" />
+   
+        <script src="due.js" charset="utf-8" defer></script>
+
+    
+    <script src="utils.js" charset="utf-8" defer></script>
+	<script src="cookie.js" charset="utf-8" defer></script>
+	
+
+     
+</head>
+
+
+
+<style>
+  table {
+    border-collapse: collapse;
+  }
+
+  th, td {
+    border: 1px solid white;
+    padding: 8px;
+  }
+  a{
+  	color:white;
+  }
+</style>
+
+<body>
+
+
+<div align="center"  class="backHome">
+	<h1>Welcome to our Online Auctioning website!</h1>
+	<a href="Logout"  style="color: white;">Logout</a> 
+	<a href="#" id="id_goToBuy"  style="color: white;">Buy</a>
+	<a href="#" id="id_goToSell"  style="color: white;">Sell</a>
+</div>
+<div id="id_alert" class="alertmessage"></div>
+
+
+
+
+
+<div id = "id_sell">
+
+
+					<table class="tableList" id="id_openlistcontainer">
+					<caption>Your open auctions: </caption>
+						<thead>
+							<tr>
+								<th>Auction ID</th>
+						        <th>Best Bid</th>
+						        <th>Minimum Raise</th>
+						        <th>Time left</th>
+						        <th>Deadline</th>
+						        <th>Details</th>
+							</tr>
+						</thead>
+						<tbody id="id_openlistcontainerbody">
+						</tbody>
+					</table>
+					<p id = "id_openAlert"></p>
+
+					<table class="tableList" id="id_detailitems" >
+					<caption>The items in the auction:</caption>
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Description</th>
+								<th>Picture</th>
+							</tr>
+						</thead>
+						<tbody id="id_detailitemsbody">
+						</tbody>
+					</table>
+
+					<table class="tableList" id="id_detailcontainer" >
+					<caption>The bids placed on this auction:</caption>
+						<thead>
+							<tr>
+								<th>Bidder</th>
+								<th>Bid's Price</th>
+								<th>Bid's Date</th>
+							</tr>
+						</thead>
+						<tbody id="id_detailcontainerbody">
+
+						</tbody>
+					</table>
+
+						<form action="#" hidden="hidden">
+							<fieldset>
+								<input id="id_closeauctionbutton" type="button" value="Close this auction">
+								<input type="hidden" name="AuctionId" id="closeastahidden">
+							</fieldset>
+						</form>
+
+					<br>
+
+
+					
+					<table class="tableList" id="id_closedlistcontainer">
+					<caption>Your closed auctions: </caption>
+						<thead>
+							<tr>
+						        <th>Auction ID</th>
+						        <th>Deadline</th>
+						        <th>Winning Bid</th>
+						        <th>Details</th>
+							</tr>
+						</thead>
+						<tbody id="id_closedlistcontainerbody">
+						</tbody>
+					</table>
+					
+					<br>
+
+					<table class="tableList" id="id_detailitems_closed" >
+					<caption>The items in the auction:</caption>
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Description</th>
+								<th>Picture</th>
+							</tr>
+						</thead>
+						<tbody id="id_detailitemsbody_closed">
+						</tbody>
+					</table>
+					
+					<br>
+					
+					<table class="tableList" id="id_winner" >
+					<caption>The winner of this auction:</caption>
+						<thead>
+							<tr>
+								<th>Username</th>
+								<th>Name</th>
+								<th>Surname</th>
+								<th>Email</th>
+								<th>Address</th>
+							</tr>
+						</thead>
+						<tbody id="id_winnerbody">
+						</tbody>
+					</table>
+
+
+		<div><!--FORM PER CREARE UN NUOVO ARTICOLO-->
+			<p>Insert a new Item:</p>
+			<form id="id_newItemForm" action="#" class="input-container">
+				<fieldset>
+					<p><label class="input-label">Name: </label><input type="text" placeholder="Enter a name..." name="name" required /></p>
+					<p><label class="input-label">Description: </label><input type="text" placeholder="Write here a complete description for the current item"  name="description" required /></p>
+					<p><label class="input-label">Price: </label><input type="number" name="price" min=1 step=0.01 required /></p>
+					<p><label class="input-label">Picture: </label><input type="file" name="file" required /></p>
+					
+					<p><input type="button" name="Submit"  value="submit" class="submit"></p>
+				</fieldset>
+			</form>
+		</div>
+
+		<div><!--FORM PER CREARE UNA NUOVA ASTA-->
+			<p>Create a new Auction:</p>
+			<form id="id_newAuctionForm" action="#">
+				<!--  <fieldset>-->
+				
+					<div id="id_selectItems"></div>
+				<!-- </fieldset>		-->			
+					<p><label class="input-label">Minimum Raise: </label><input type="number" step="0.01" min=1 name="minRaise" required /></p>
+					<p><label class="input-label">Auction closing time:</label><input type="datetime-local" name="deadline" required /></p>					
+
+					<p>
+						<input type="submit" name="submit" value="Submit">
+					</p>
+
+			</form>
+		</div>
+
+
+	    
+</div>
+
+
+<div id = "id_buy">
+
+
+
+		<!-- FILTER BY KEYWORD -->
+
+	<form id="id_search" action="#" class="form">
+	<fieldset>
+
+		<p>
+			<label class="form">Keyword: </label> <br>
+			<input type="text" id="keyword" name="keyword" class="text-input"  placeholder="Insert your keyword..."  required />
+		</p>
+		<p>
+			<input type="button" value="Submit" name="Submit" class="submit">
+		</p>
+	</fieldset>
+	</form>
+	
+	
+	<br>
+	<br>
+	
+	
+
+					<table class="tableList" id="id_cookieAuctionsContainer" >
+					<caption>Auctions that you visited in the last 30 days:</caption>
+						<thead>
+							<tr>
+								<td>
+									<th>Auction ID</th>
+									<th>Current Best Bid</th>
+									<th>Minimum Raise</th>
+									<th>Deadline</th>
+									<!-- <th>Items</th> -->
+									<th>Details</th>
+								</td>
+							</tr>
+						</thead>
+						<tbody id="id_cookieAuctionsBody">
+						</tbody>
+					</table>
+		
+	<br>
+	<br>
+		
+
+	 
+	 <!-- LISTA ASTE APERTE RICERCA-->
+	 
+
+					<table class="tableList" id="id_searchedAuctionsContainer">
+					<caption>Auctions that contain the keyword:</caption>
+						<thead>
+							<tr>
+								<!-- <td> -->								
+								<th>ID</th>
+								<th>Current Best Bid</th>
+								<th>Minimum Raise</th>
+								<th>Deadline</th>
+								<th>Details</th>
+							<!-- </td> -->	
+							</tr>
+						</thead>
+						<tbody id="id_searchedAuctionsBody">
+						</tbody>
+					</table>
+	
+<br>
+					<!-- DETTAGLI ASTE APERTE + BID -->
+					<table class="tableList" id="id_makeOfferTable">
+						<tr>
+							<td>
+								<h3>This auction's items:</h3>
+								<table class="tableList" id="id_OfferItems">
+									<thead>
+										<tr>
+											<th>Item</th>
+											<th>Description</th>
+											<th>Picture</th>
+										</tr>
+									</thead>
+									<tbody id="id_OfferItemsBody"></tbody>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<h3>Here is the list of all the bids for this auction</h3>
+								<table class="tableList" id="id_offersList">
+
+									<thead>
+										<tr>
+											<th>Bidder</th>
+											<th>Bid's Price</th>
+											<th>Bid's Date</th>
+										</tr>
+									</thead>
+									<tbody id="id_offersListBody"></tbody>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<form id="id_makeOfferButton" action="#">
+									<fieldset>
+									<input type="hidden" name="auctionID_bid" id="auctionID_bid">
+										<p><label class="input-label">Place your bid: </label><input type="number" step="0.01" name="bid" id="bid" /></p>
+										<p><input type="button" name="Place a Bid" value="submit" class="submit"></p>
+					<!--  	document.getElementById("auctionID_bid").setAttribute("value", a.auctionID);-->
+										
+										
+									</fieldset>
+								</form>
+							</td>
+						</tr>
+					</table>
+
+	
+	
+	<!-- LISTA ASTE VINTE -->
+	<!--  <h1>Auctions that you won before: </h1>-->
+	<table class="tableList" id="id_wonAuctionsTable">
+	<caption>Auctions that you won before: </caption>
+		<thead>
+				<tr>
+					<th>Auction ID</th>
+					<th>Your Bid</th>
+				</tr>
+		</thead>
+		<tbody id="id_wonAuctionsBody"></tbody>
+		</table>
+</div>
+
+</body>
+</html>
